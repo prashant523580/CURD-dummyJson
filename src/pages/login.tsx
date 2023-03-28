@@ -1,36 +1,36 @@
 import React, { useEffect } from 'react'
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { useRouter } from 'next/router';
-export default function Login({authenticate} : any) {
-    const router = useRouter();
-    React.useEffect(() => {
+export default function Login({ authenticate }: any) {
+  const router = useRouter();
+  React.useEffect(() => {
 
-        if(authenticate == true) {
-            router.push("/")
-        }
-    },[authenticate])
-   const handleLogin = (e : any) => {
-       e.preventDefault();
-    console.log("clicked")
-            fetch('https://dummyjson.com/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    username: 'kminchelle',
-                    password: '0lelplR',
-                    // expiresInMins: 60, // optional
-                })
-              })
-              .then(res => res.json())
-              .then((data) => {
-                localStorage.setItem("auth" , JSON.stringify(data))
-                localStorage.setItem("token" , JSON.stringify(data.token))
-                    router.push("/")
-              });
+    if (authenticate == true) {
+      router.push("/")
     }
+  }, [authenticate])
+  const handleLogin = (e: any) => {
+    e.preventDefault();
+    console.log("clicked")
+    fetch('https://dummyjson.com/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: 'kminchelle',
+        password: '0lelplR',
+        // expiresInMins: 60, // optional
+      })
+    })
+      .then(res => res.json())
+      .then((data) => {
+        localStorage.setItem("auth", JSON.stringify(data))
+        localStorage.setItem("token", JSON.stringify(data.token))
+        router.push("/")
+      });
+  }
   return (
     <div>
-             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
           <div>
             <img
@@ -41,7 +41,7 @@ export default function Login({authenticate} : any) {
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
               Sign in to your account
             </h2>
-           
+
           </div>
           <form className="mt-8 space-y-6" action="#" method="POST">
             <input type="hidden" name="remember" defaultValue="true" />

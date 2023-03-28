@@ -10,29 +10,29 @@ const navigation = [
   { name: 'Calendar', href: '#', current: false },
 ]
 
-function classNames(...classes : any) {
+function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
 const links = [
-    {
-        label : "Home",
-        path: "/",
-        
-    },
-    {
-        label : "products",
-        path:"/products"
-    },
-    {
-        label : "add product",
-        path:"/addproduct"
-    },
-   
+  {
+    label: "Home",
+    path: "/",
+
+  },
+  {
+    label: "products",
+    path: "/products"
+  },
+  {
+    label: "add product",
+    path: "/addproduct"
+  },
+
 ]
-export default function Navbar({authenticate,logout} : any) {
+export default function Navbar({ auth, logout }: any) {
   return (
     <Disclosure as="nav" className="bg-gray-800 ">
-      {({ open } : any) => (
+      {({ open }: any) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
@@ -62,7 +62,7 @@ export default function Navbar({authenticate,logout} : any) {
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {links.map((item : any) => (
+                    {links.map((item: any) => (
                       <Link
                         key={item.label}
                         href={item.path}
@@ -109,63 +109,63 @@ export default function Navbar({authenticate,logout} : any) {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     {
-                        authenticate === true ? 
+                      auth.isAuthenticate === true ?
                         <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active } : any) => (
-                            <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                            >
-                            Your Profile
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active } : any) => (
-                          <a
-                          href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                            onClick={logout}
-                          >
-                            Sign out
-                          </a>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items> : 
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  
-                    <Menu.Item>
-                      {({ active }) => (
-                        <Link
-                          href="/login"
-                          className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                        >
-                          login
-                        </Link>
-                      )}
-                    </Menu.Item>
-                  </Menu.Items>
-                }
+                          <Menu.Item>
+                            {({ active }: any) => (
+                              <a
+                                href="#"
+                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                              >
+                                Your Profile
+                              </a>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }: any) => (
+                              <a
+                                href="#"
+                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                              >
+                                Settings
+                              </a>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                href="#"
+                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                onClick={logout}
+                              >
+                                Sign out
+                              </a>
+                            )}
+                          </Menu.Item>
+                        </Menu.Items> :
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/login"
+                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                              >
+                                login
+                              </Link>
+                            )}
+                          </Menu.Item>
+                        </Menu.Items>
+                    }
                   </Transition>
-                  </Menu>
-                  </div>
+                </Menu>
+              </div>
             </div>
           </div>
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
-              {links.map((item : any) => (
+              {links.map((item: any) => (
                 <Disclosure.Button
                   key={item.label}
                   as="a"
@@ -196,5 +196,5 @@ export default function Navbar({authenticate,logout} : any) {
     //         }
     //     </div>
     // </nav>
-      )
+  )
 }
