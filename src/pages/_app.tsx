@@ -20,7 +20,6 @@ interface AuthTypes {
 }
 export default function App({ Component, pageProps }: AppProps) {
   const [products, setProducts] = React.useState([]);
-  const [isAuthenticate, setIsAuthenticate] = React.useState(false);
   const [auth, setAuth] = React.useState<AuthTypes>({
     user: {
     },
@@ -41,7 +40,6 @@ export default function App({ Component, pageProps }: AppProps) {
       user = JSON.parse(user)
     }
     if (Object.keys(user).length > 0) {
-      setIsAuthenticate(true)
       setAuth({
         user: user,
         token,
@@ -54,12 +52,11 @@ export default function App({ Component, pageProps }: AppProps) {
   const logout = () => {
     localStorage.removeItem("auth");
     localStorage.removeItem("token")
-    setIsAuthenticate(false)
   }
   return (
     <>
-      <Navbar authenticate={isAuthenticate} auth={auth} logout={logout} products={products} />
-      <Component {...pageProps} auth={auth} authenticate={isAuthenticate} products={products} />
+      <Navbar  auth={auth} logout={logout} products={products} />
+      <Component {...pageProps} auth={auth}  products={products} />
     </>
 
   )

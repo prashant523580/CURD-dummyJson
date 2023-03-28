@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { useRouter } from 'next/router';
-export default function Login({ authenticate }: any) {
+export default function Login({ auth }: any) {
   const router = useRouter();
   React.useEffect(() => {
 
-    if (authenticate == true) {
+    if (auth.isAuthenticate == true) {
       router.push("/")
     }
-  }, [authenticate])
+  }, [auth.isAuthenticate])
   const handleLogin = (e: any) => {
     e.preventDefault();
     console.log("clicked")
