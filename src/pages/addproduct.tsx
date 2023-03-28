@@ -52,8 +52,10 @@ export default function addproduct() {
         // formData.append("description", `${productInfo.description}`)
         // formData.append("discountPercentage", productInfo.discountPercentage)
         // formData.append("thumbnail", image)
-        let addData = {
-            ...productInfo,
+        
+
+            let addData = {
+                ...productInfo,
             thumbnail: image.name
         }
         // console.log(formData)
@@ -62,12 +64,15 @@ export default function addproduct() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(addData)
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-            });
-        console.log(addData)
-
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        });
+        setProductInfo({})
+        setShowModel(false)
+        alert("successfully added.")
+        // console.log(addData)
+    
     }
     return (
         <div className='flex justify-center flex-col w-full'>
@@ -96,19 +101,19 @@ export default function addproduct() {
                             </button>
                         </div>
                         {/* <!-- Modal body --> */}
-                        <form action="#">
+                        <form  onSubmit={handleAddProduct}>
                             <div className="grid gap-4 mb-4 sm:grid-cols-2">
                                 <div>
                                     <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                                    <input onChange={handleInputEvent} type="text" name="title" id="title" value={productInfo.title} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500" placeholder="Ex. Apple iMac 27&ldquo;" />
+                                    <input onChange={handleInputEvent} type="text" name="title" id="title" value={productInfo.title} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500" placeholder="Ex. Apple iMac 27&ldquo;" required/>
                                 </div>
                                 <div>
                                     <label htmlFor="brand" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand</label>
-                                    <input onChange={handleInputEvent} type="text" name="brand" id="brand" value={productInfo.brand} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500" placeholder="Ex. Apple" />
+                                    <input onChange={handleInputEvent} type="text" name="brand" id="brand" value={productInfo.brand} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500" placeholder="Ex. Apple" required />
                                 </div>
                                 <div>
                                     <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                                    <input onChange={handleInputEvent} type="number" value={productInfo.price} name="price" id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500" placeholder="Rs299" />
+                                    <input onChange={handleInputEvent} type="number" value={productInfo.price} name="price" id="price" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500" placeholder="Rs299" required />
                                 </div>
                                 <div>
                                     <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
@@ -126,7 +131,7 @@ export default function addproduct() {
                                 </div>
                                 <div>
                                     <label htmlFor="image" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Images</label>
-                                    <input onChange={handleImageEvent} type="file" name="image" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500" placeholder="Rs299" />
+                                    <input onChange={handleImageEvent} type="file" name="image" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500" required />
                                 </div>
                                 <div>
                                     {image &&
@@ -137,11 +142,11 @@ export default function addproduct() {
                                 </div>
                                 <div className="sm:col-span-2">
                                     <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                                    <textarea name='description' onChange={handleInputEvent} id="description" defaultValue={productInfo.description} rows={5} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-slate-500 focus:border-slate-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500" placeholder="Write a description..." />
+                                    <textarea required name='description' onChange={handleInputEvent} id="description" defaultValue={productInfo.description} rows={5} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-slate-500 focus:border-slate-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-slate-500 dark:focus:border-slate-500" placeholder="Write a description..." />
                                 </div>
                             </div>
                             <div className="flex items-center space-x-4">
-                                <button type="submit" onClick={handleAddProduct} className="text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800">
+                                <button type="submit" className="text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800">
                                     add product
                                 </button>
                              
